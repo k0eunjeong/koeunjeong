@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GO EUNJEONG ARCHIVE</title>
+<title>koeunjeong desktop</title>
 
 <style>
 
@@ -20,113 +20,216 @@ body{
     height:100vh;
     overflow:hidden;
 
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 
-    background:#80b3ff;
+    background:#8ab6ff;
 }
 
-/* 배경 */
+/* 노이즈 */
 
-.background{
+body::after{
+
+    content:"";
+
     position:fixed;
     inset:0;
 
-    background:url('./gmgmfla.png') no-repeat center center;
+    background-image:
+    repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,.02) 0px,
+    rgba(255,255,255,.02) 1px,
+    transparent 1px,
+    transparent 2px
+    );
 
-    background-size:cover;
+    opacity:.35;
 
-    z-index:1;
+    pointer-events:none;
+}
+
+/* 메뉴바 */
+
+.topbar{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:32px;
+
+    background:rgba(120,130,145,.7);
+
+    backdrop-filter:blur(20px);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 14px;
+
+    z-index:1000;
+
+    color:white;
+
+    font-size:14px;
+    font-weight:600;
+}
+
+.top-left{
+
+    display:flex;
+    gap:18px;
+}
+
+.top-right{
+
+    font-size:14px;
+}
+
+/* 메모 */
+
+.note{
+
+    position:absolute;
+
+    top:110px;
+    left:110px;
+
+    width:330px;
+
+    background:#f1e78a;
+
+    padding:24px;
+
+    line-height:1.9;
+
+    font-size:17px;
+
+    color:#111;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    border-radius:4px;
+
+    z-index:20;
 }
 
 /* 데스크탑 */
 
 .desktop{
+
     position:relative;
+
     width:100%;
     height:100%;
-    z-index:10;
 }
 
 /* 아이콘 */
 
-.icon-item{
+.icon{
+
     position:absolute;
 
     display:flex;
     flex-direction:column;
     align-items:center;
 
-    width:100px;
-
     transition:.2s ease;
-
-    text-align:center;
 }
 
-.icon-item:hover{
+.icon:hover{
+
     transform:scale(1.08);
 }
 
-.icon-item img{
-    width:60px;
+.icon img{
 
-    filter:drop-shadow(0 5px 15px rgba(0,0,0,.2));
+    width:82px;
+
+    filter:drop-shadow(0 5px 12px rgba(0,0,0,.18));
 }
 
-.icon-item span{
-    margin-top:8px;
+.icon span{
+
+    margin-top:10px;
 
     color:white;
 
-    font-size:12px;
+    font-size:14px;
 
-    text-shadow:0 1px 4px rgba(0,0,0,.8);
-
-    background:rgba(0,0,0,.25);
-
-    padding:3px 8px;
-
-    border-radius:12px;
+    text-shadow:0 2px 6px rgba(0,0,0,.55);
 }
 
 /* 위치 */
 
-.pos-about{
-    top:40%;
-    left:25%;
+.about{
+
+    top:60px;
+    right:40px;
 }
 
-.pos-cv{
-    top:42%;
-    left:35%;
+.projects{
+
+    top:470px;
+    left:50%;
 }
 
-.pos-works{
-    top:38%;
-    left:45%;
+.cv{
+
+    top:250px;
+    left:60%;
 }
 
-.pos-exp{
-    top:40%;
-    left:65%;
+.archive{
+
+    top:370px;
+    right:300px;
 }
 
-/* 윈도우 */
+.contact{
+
+    bottom:120px;
+    right:320px;
+}
+
+.instagram{
+
+    bottom:170px;
+    left:320px;
+}
+
+.news{
+
+    top:240px;
+    right:150px;
+}
+
+.sticker{
+
+    top:130px;
+    right:330px;
+}
+
+/* 윈도우 공통 */
 
 .window{
+
     position:fixed;
 
     top:50%;
     left:50%;
 
-    transform:translate(-50%,-50%) scale(.95);
+    transform:translate(-50%,-50%) scale(.96);
 
-    width:96%;
-    height:95vh;
+    width:92%;
+    height:90vh;
 
-    background:#efefef;
+    background:#f1f1f1;
 
-    border-radius:28px;
+    border-radius:22px;
 
     overflow:hidden;
 
@@ -136,10 +239,11 @@ body{
 
     transition:.35s ease;
 
-    z-index:100;
+    z-index:999;
 }
 
 .window.active{
+
     opacity:1;
 
     pointer-events:auto;
@@ -147,29 +251,33 @@ body{
     transform:translate(-50%,-50%) scale(1);
 }
 
-/* 상단 */
+/* 헤더 */
 
 .window-header{
-    height:70px;
+
+    width:100%;
+    height:56px;
+
+    background:#f8f8f8;
+
+    border-bottom:1px solid #ddd;
 
     display:flex;
     align-items:center;
 
-    padding:0 28px;
-
-    border-bottom:1px solid #d8d8d8;
-
-    background:#f7f7f7;
+    padding:0 20px;
 }
 
 .traffic{
+
     display:flex;
-    gap:10px;
+    gap:8px;
 }
 
 .light{
-    width:15px;
-    height:15px;
+
+    width:14px;
+    height:14px;
 
     border-radius:50%;
 }
@@ -187,9 +295,10 @@ body{
 }
 
 .window-title{
-    margin-left:22px;
 
-    font-size:18px;
+    margin-left:18px;
+
+    font-size:16px;
     font-weight:600;
 
     color:#555;
@@ -198,56 +307,65 @@ body{
 /* 콘텐츠 */
 
 .window-content{
+
     width:100%;
-    height:calc(100% - 70px);
+    height:calc(100% - 56px);
 
-    overflow-y:auto;
+    overflow:auto;
 
-    padding:28px;
-
-    background:#f3f3f3;
+    padding:34px;
 }
 
-/* 프로젝트 헤더 */
+/* 프로젝트 상단 */
 
-.project-info{
+.project-top{
 
     display:grid;
 
     grid-template-columns:120px 1fr 1fr;
 
-    padding-bottom:22px;
+    column-gap:40px;
 
-    border-bottom:1px solid #d8d8d8;
+    border-bottom:1px solid #d7d7d7;
+
+    padding-bottom:24px;
 
     margin-bottom:40px;
 
     color:#444;
-
-    column-gap:40px;
 }
 
 .project-number{
+
     font-weight:700;
 }
 
 .project-name{
+
     font-weight:700;
 }
 
+.project-main{
+
+    font-size:32px;
+}
+
 .project-date{
-    margin-top:4px;
+
+    margin-top:5px;
 
     font-style:italic;
 }
 
-.project-description{
-    line-height:1.45;
+.project-text{
+
+    line-height:1.5;
 }
 
-/* 이미지 그리드 */
+/* 작품 */
 
 .gallery{
+
     display:grid;
 
     grid-template-columns:repeat(5,1fr);
@@ -255,9 +373,8 @@ body{
     gap:60px 24px;
 }
 
-/* 작품 */
+.art{
 
-.art-item{
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -265,63 +382,79 @@ body{
     transition:.25s ease;
 }
 
-.art-item:hover{
+.art:hover{
+
     transform:translateY(-6px);
 }
 
-.art-item img{
+.art img{
+
     width:100%;
 
     background:white;
 
-    padding:10px;
+    padding:8px;
 
     box-shadow:0 4px 14px rgba(0,0,0,.08);
 }
 
-.art-item p{
-    margin-top:14px;
+.art p{
 
-    font-size:16px;
+    margin-top:12px;
 
     color:#555;
+
+    font-size:16px;
 }
 
-/* 세로 비율 */
+/* 비율 */
 
 .vertical img{
+
     aspect-ratio:3/4;
 
     object-fit:cover;
 }
 
-/* 가로 비율 */
-
 .horizontal img{
+
     aspect-ratio:4/3;
 
     object-fit:cover;
 }
 
-/* 정사각 */
-
 .square img{
+
     aspect-ratio:1/1;
 
     object-fit:cover;
 }
 
+/* contact text */
+
+.contact-content{
+
+    padding:60px;
+
+    font-size:32px;
+
+    line-height:2.5;
+
+    color:#111;
+}
+
 /* 커서 */
 
 .cursor{
+
     position:fixed;
 
-    width:20px;
-    height:20px;
-
-    background:white;
+    width:18px;
+    height:18px;
 
     border-radius:50%;
+
+    background:white;
 
     mix-blend-mode:difference;
 
@@ -329,7 +462,7 @@ body{
 
     transform:translate(-50%,-50%);
 
-    z-index:9999;
+    z-index:99999;
 }
 
 </style>
@@ -337,79 +470,157 @@ body{
 
 <body>
 
-<div class="background"></div>
+<!-- 메뉴바 -->
 
-<div class="desktop">
+<div class="topbar">
 
-    <!-- ABOUT -->
+    <div class="top-left">
 
-    <div class="icon-item pos-about">
-
-        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991108.png">
-
-        <span>About me.rtf</span>
-
-    </div>
-
-    <!-- CV -->
-
-    <div class="icon-item pos-cv">
-
-        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png">
-
-        <span>CV_2045.pdf</span>
+        <div>koeunjeong</div>
+        <div>File</div>
+        <div>Edit</div>
+        <div>View</div>
+        <div>Window</div>
+        <div>Go</div>
+        <div>Help</div>
 
     </div>
 
-    <!-- WORK -->
+    <div class="top-right">
 
-    <div class="icon-item pos-works" id="openWorks">
-
-        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
-
-        <span>Selected Work</span>
-
-    </div>
-
-    <!-- EXP -->
-
-    <div class="icon-item pos-exp">
-
-        <img src="https://cdn-icons-png.flaticon.com/512/644/644667.png">
-
-        <span>Experiments</span>
+        Friday May 15 &nbsp; 4:15 PM
 
     </div>
 
 </div>
 
-<!-- 윈도우 -->
+<!-- 메모 -->
 
-<div class="window" id="worksWindow">
+<div class="note">
+
+    Hello.<br><br>
+
+    Thanks for stopping by.<br><br>
+
+    Feel free to send me an email:<br>
+
+    <u>gej201@naver.com</u><br><br>
+
+    Take care,<br><br>
+
+    Go Eunjeong |
+
+</div>
+
+<!-- 데스크탑 -->
+
+<div class="desktop">
+
+    <!-- ABOUT -->
+
+    <div class="icon about">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+        <span>About me.rtf</span>
+
+    </div>
+
+    <!-- WORK -->
+
+    <div class="icon projects" id="openProjects">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
+
+        <span>Work</span>
+
+    </div>
+
+    <!-- CV -->
+
+    <div class="icon cv">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png">
+
+        <span>CV_2053.pdf</span>
+
+    </div>
+
+    <!-- EXHIBITION -->
+
+    <div class="icon archive">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/833/833524.png">
+
+        <span>Exhibition</span>
+
+    </div>
+
+    <!-- CONTACT -->
+
+    <div class="icon contact" id="openContact">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/9068/9068756.png">
+
+        <span>Contact</span>
+
+    </div>
+
+    <!-- INSTAGRAM -->
+
+    <div class="icon instagram">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png">
+
+        <span>Instagram ↗</span>
+
+    </div>
+
+    <!-- TEXT -->
+
+    <div class="icon news">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/1001/1001371.png">
+
+        <span>Text</span>
+
+    </div>
+
+    <!-- FLAG -->
+
+    <div class="icon sticker">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png">
+
+        <span>flag.gif</span>
+
+    </div>
+
+</div>
+
+<!-- WORK WINDOW -->
+
+<div class="window" id="projectWindow">
 
     <div class="window-header">
 
         <div class="traffic">
 
             <div class="light red" id="closeBtn"></div>
-
             <div class="light yellow"></div>
-
             <div class="light green"></div>
 
         </div>
 
         <div class="window-title">
-            Selected Work
+            Work
         </div>
 
     </div>
 
     <div class="window-content">
 
-        <!-- 상단 프로젝트 정보 -->
-
-        <div class="project-info">
+        <div class="project-top">
 
             <div>
 
@@ -425,7 +636,7 @@ body{
 
             <div>
 
-                <div style="font-size:32px;">
+                <div class="project-main">
                     Vivamus sed sapien
                 </div>
 
@@ -435,7 +646,7 @@ body{
 
             </div>
 
-            <div class="project-description">
+            <div class="project-text">
 
                 Praesent bibendum a elit non efficitur.
                 Etiam et velit vitae quam aliquet fermentum.
@@ -446,46 +657,46 @@ body{
 
         </div>
 
-        <!-- 이미지 -->
+        <!-- 작품 -->
 
         <div class="gallery">
 
-            <div class="art-item square">
+            <div class="art square">
                 <img src="./image/paper1.jpg">
                 <p>Image 1</p>
             </div>
 
-            <div class="art-item vertical">
+            <div class="art vertical">
                 <img src="./image/sheep1.png">
                 <p>Image 2</p>
             </div>
 
-            <div class="art-item square">
+            <div class="art square">
                 <img src="./image/paper2.jpg">
                 <p>Image 3</p>
             </div>
 
-            <div class="art-item horizontal">
+            <div class="art horizontal">
                 <img src="./image/flash1.png">
                 <p>Image 4</p>
             </div>
 
-            <div class="art-item square">
+            <div class="art square">
                 <img src="./image/paper3.png">
                 <p>Image 5</p>
             </div>
 
-            <div class="art-item vertical">
+            <div class="art vertical">
                 <img src="./image/carving3.png">
                 <p>Image 6</p>
             </div>
 
-            <div class="art-item horizontal">
+            <div class="art horizontal">
                 <img src="./image/flash2.png">
                 <p>Image 7</p>
             </div>
 
-            <div class="art-item square">
+            <div class="art square">
                 <img src="./image/bird.jpg">
                 <p>Image 8</p>
             </div>
@@ -496,31 +707,95 @@ body{
 
 </div>
 
+<!-- CONTACT WINDOW -->
+
+<div class="window" id="contactWindow">
+
+    <div class="window-header">
+
+        <div class="traffic">
+
+            <div class="light red" id="closeContact"></div>
+
+            <div class="light yellow"></div>
+
+            <div class="light green"></div>
+
+        </div>
+
+        <div class="window-title">
+            Contact
+        </div>
+
+    </div>
+
+    <div class="window-content">
+
+        <div class="contact-content">
+
+            <p>
+            E-mail address :
+            <u>gej201@naver.com</u>
+            </p>
+
+            <p>
+            Instagram :
+            <u>@0o0ogo</u>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 커서 -->
+
 <div class="cursor"></div>
 
 <script>
 
-/* 윈도우 */
+/* WORK */
 
-const openWorks = document.getElementById('openWorks');
+const openProjects = document.getElementById('openProjects');
 
-const worksWindow = document.getElementById('worksWindow');
+const projectWindow = document.getElementById('projectWindow');
 
 const closeBtn = document.getElementById('closeBtn');
 
-openWorks.addEventListener('click',()=>{
+openProjects.addEventListener('click',()=>{
 
-    worksWindow.classList.add('active');
+    projectWindow.classList.add('active');
 
 });
 
 closeBtn.addEventListener('click',()=>{
 
-    worksWindow.classList.remove('active');
+    projectWindow.classList.remove('active');
 
 });
 
-/* 커서 */
+/* CONTACT */
+
+const openContact = document.getElementById('openContact');
+
+const contactWindow = document.getElementById('contactWindow');
+
+const closeContact = document.getElementById('closeContact');
+
+openContact.addEventListener('click',()=>{
+
+    contactWindow.classList.add('active');
+
+});
+
+closeContact.addEventListener('click',()=>{
+
+    contactWindow.classList.remove('active');
+
+});
+
+/* CURSOR */
 
 const cursor = document.querySelector('.cursor');
 

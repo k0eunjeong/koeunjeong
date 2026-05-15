@@ -19,8 +19,10 @@ body{
     width:100vw;
     height:100vh;
     overflow:hidden;
-    font-family:Helvetica, Arial, sans-serif;
-    background:#dcdcdc;
+
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+
+    background:#80b3ff;
 }
 
 /* 배경 */
@@ -29,101 +31,87 @@ body{
     position:fixed;
     inset:0;
 
-    /* 여기 중요 */
-    background:url('gmgmfla.png');
+    background:url('./gmgmfla.png') no-repeat center center;
 
     background-size:cover;
-    background-position:center;
 
-    filter:grayscale(100%);
+    z-index:1;
 }
 
-/* 어두운 필름 레이어 */
-
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.18);
-    pointer-events:none;
-}
-
-/* 메인 폴더 */
+/* 데스크탑 */
 
 .desktop{
     position:relative;
     width:100%;
     height:100%;
-    z-index:5;
+    z-index:10;
 }
 
-.folder{
+/* 아이콘 */
+
+.icon-item{
     position:absolute;
-
-    width:150px;
-    height:105px;
-
-    background:linear-gradient(to bottom,#6fd0ff,#36aae8);
-
-    border-radius:18px;
 
     display:flex;
-    justify-content:center;
+    flex-direction:column;
     align-items:center;
 
+    width:100px;
+
+    transition:.2s ease;
+
+    text-align:center;
+}
+
+.icon-item:hover{
+    transform:scale(1.08);
+}
+
+.icon-item img{
+    width:60px;
+
+    filter:drop-shadow(0 5px 15px rgba(0,0,0,.2));
+}
+
+.icon-item span{
+    margin-top:8px;
+
     color:white;
-    font-size:1.7rem;
-    font-weight:700;
 
-    box-shadow:
-    inset 0 8px 12px rgba(255,255,255,0.35),
-    0 8px 25px rgba(0,0,0,0.25);
+    font-size:12px;
 
-    transition:.3s;
+    text-shadow:0 1px 4px rgba(0,0,0,.8);
+
+    background:rgba(0,0,0,.25);
+
+    padding:3px 8px;
+
+    border-radius:12px;
 }
 
-.folder::before{
-    content:"";
+/* 위치 */
 
-    position:absolute;
-
-    top:-12px;
-    left:12px;
-
-    width:55px;
-    height:18px;
-
-    background:#8adfff;
-
-    border-radius:8px 8px 0 0;
+.pos-about{
+    top:40%;
+    left:25%;
 }
 
-.folder:hover{
-    transform:translateY(-5px) scale(1.04);
+.pos-cv{
+    top:42%;
+    left:35%;
 }
 
-/* 폴더 위치 */
-
-.works{
-    left:12%;
-    bottom:16%;
+.pos-works{
+    top:38%;
+    left:45%;
 }
 
-.text{
-    left:38%;
-    bottom:16%;
+.pos-exp{
+    top:40%;
+    left:65%;
 }
 
-.cv{
-    left:62%;
-    bottom:16%;
-}
-
-.contact{
-    right:10%;
-    bottom:16%;
-}
-
-/* Finder Window */
+/* 윈도우 */
 
 .window{
     position:fixed;
@@ -133,192 +121,215 @@ body{
 
     transform:translate(-50%,-50%) scale(.95);
 
-    width:90%;
-    height:88vh;
+    width:96%;
+    height:95vh;
 
     background:#efefef;
 
-    border-radius:22px;
+    border-radius:28px;
 
     overflow:hidden;
 
     opacity:0;
+
     pointer-events:none;
 
-    transition:.35s;
+    transition:.35s ease;
 
     z-index:100;
 }
 
 .window.active{
     opacity:1;
+
     pointer-events:auto;
+
     transform:translate(-50%,-50%) scale(1);
 }
 
-/* 상단 바 */
+/* 상단 */
 
-.topbar{
-    width:100%;
-    height:72px;
-
-    background:#f7f7f7;
+.window-header{
+    height:70px;
 
     display:flex;
     align-items:center;
-    justify-content:space-between;
 
-    padding:0 30px;
+    padding:0 28px;
 
-    border-bottom:1px solid #ddd;
+    border-bottom:1px solid #d8d8d8;
+
+    background:#f7f7f7;
 }
 
-.logo{
-    font-size:2rem;
-    font-weight:700;
-    color:#444;
+.traffic{
+    display:flex;
+    gap:10px;
 }
 
-.close{
-    width:40px;
-    height:40px;
-
-    border:none;
+.light{
+    width:15px;
+    height:15px;
 
     border-radius:50%;
-
-    background:black;
-    color:white;
-
-    font-size:1rem;
 }
 
-/* 이미지 영역 */
+.red{
+    background:#ff5f57;
+}
+
+.yellow{
+    background:#febc2e;
+}
+
+.green{
+    background:#28c840;
+}
+
+.window-title{
+    margin-left:22px;
+
+    font-size:18px;
+    font-weight:600;
+
+    color:#555;
+}
+
+/* 콘텐츠 */
+
+.window-content{
+    width:100%;
+    height:calc(100% - 70px);
+
+    overflow-y:auto;
+
+    padding:28px;
+
+    background:#f3f3f3;
+}
+
+/* 프로젝트 헤더 */
+
+.project-info{
+
+    display:grid;
+
+    grid-template-columns:120px 1fr 1fr;
+
+    padding-bottom:22px;
+
+    border-bottom:1px solid #d8d8d8;
+
+    margin-bottom:40px;
+
+    color:#444;
+
+    column-gap:40px;
+}
+
+.project-number{
+    font-weight:700;
+}
+
+.project-name{
+    font-weight:700;
+}
+
+.project-date{
+    margin-top:4px;
+
+    font-style:italic;
+}
+
+.project-description{
+    line-height:1.45;
+}
+
+/* 이미지 그리드 */
 
 .gallery{
-    position:relative;
+    display:grid;
 
+    grid-template-columns:repeat(5,1fr);
+
+    gap:60px 24px;
+}
+
+/* 작품 */
+
+.art-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    transition:.25s ease;
+}
+
+.art-item:hover{
+    transform:translateY(-6px);
+}
+
+.art-item img{
     width:100%;
-    height:calc(100% - 72px);
 
-    overflow:auto;
+    background:white;
 
-    padding:80px;
+    padding:10px;
+
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
 }
 
-/* 작품 이미지 */
+.art-item p{
+    margin-top:14px;
 
-.art{
-    position:absolute;
+    font-size:16px;
 
-    transition:.3s;
+    color:#555;
 }
 
-.art img{
-    width:100%;
-    display:block;
+/* 세로 비율 */
 
-    border:8px solid #f3f3f3;
+.vertical img{
+    aspect-ratio:3/4;
 
-    box-shadow:0 5px 18px rgba(0,0,0,.18);
+    object-fit:cover;
 }
 
-.art p{
-    margin-top:10px;
+/* 가로 비율 */
 
-    text-align:center;
+.horizontal img{
+    aspect-ratio:4/3;
 
-    color:#222;
-
-    font-size:1.3rem;
+    object-fit:cover;
 }
 
-.art:hover{
-    transform:scale(1.08);
-    z-index:10;
+/* 정사각 */
+
+.square img{
+    aspect-ratio:1/1;
+
+    object-fit:cover;
 }
 
-/* 개별 위치 */
-
-.a1{
-    width:140px;
-    top:40px;
-    left:60px;
-}
-
-.a2{
-    width:220px;
-    top:60px;
-    left:320px;
-}
-
-.a3{
-    width:160px;
-    top:220px;
-    left:680px;
-}
-
-.a4{
-    width:180px;
-    top:200px;
-    left:980px;
-}
-
-.a5{
-    width:140px;
-    top:480px;
-    left:120px;
-}
-
-.a6{
-    width:160px;
-    top:420px;
-    left:520px;
-}
-
-.a7{
-    width:220px;
-    top:560px;
-    left:900px;
-}
-
-.a8{
-    width:160px;
-    top:850px;
-    left:300px;
-}
-
-.a9{
-    width:170px;
-    top:860px;
-    left:700px;
-}
-
-.a10{
-    width:120px;
-    top:1050px;
-    left:1040px;
-}
-
-/* 커스텀 커서 */
+/* 커서 */
 
 .cursor{
     position:fixed;
 
-    width:28px;
-    height:28px;
+    width:20px;
+    height:20px;
 
-    border:2px solid white;
+    background:white;
 
     border-radius:50%;
+
+    mix-blend-mode:difference;
 
     pointer-events:none;
 
     transform:translate(-50%,-50%);
 
-    mix-blend-mode:difference;
-
-    z-index:99999;
+    z-index:9999;
 }
 
 </style>
@@ -327,94 +338,158 @@ body{
 <body>
 
 <div class="background"></div>
-<div class="overlay"></div>
 
 <div class="desktop">
 
-    <div class="folder works" id="openWindow">
-        WORKS
+    <!-- ABOUT -->
+
+    <div class="icon-item pos-about">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991108.png">
+
+        <span>About me.rtf</span>
+
     </div>
 
-    <div class="folder text">
-        TEXT
+    <!-- CV -->
+
+    <div class="icon-item pos-cv">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png">
+
+        <span>CV_2045.pdf</span>
+
     </div>
 
-    <div class="folder cv">
-        CV
+    <!-- WORK -->
+
+    <div class="icon-item pos-works" id="openWorks">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
+
+        <span>Selected Work</span>
+
     </div>
 
-    <div class="folder contact">
-        CONTACT
+    <!-- EXP -->
+
+    <div class="icon-item pos-exp">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/644/644667.png">
+
+        <span>Experiments</span>
+
     </div>
 
 </div>
 
-<!-- Finder Window -->
+<!-- 윈도우 -->
 
-<div class="window" id="window">
+<div class="window" id="worksWindow">
 
-    <div class="topbar">
+    <div class="window-header">
 
-        <div class="logo">
-            image
+        <div class="traffic">
+
+            <div class="light red" id="closeBtn"></div>
+
+            <div class="light yellow"></div>
+
+            <div class="light green"></div>
+
         </div>
 
-        <button class="close" id="closeBtn">
-            ✕
-        </button>
+        <div class="window-title">
+            Selected Work
+        </div>
 
     </div>
 
-    <div class="gallery">
+    <div class="window-content">
 
-        <div class="art a1">
-            <img src="image/carving3.png">
-            <p>carving3.png</p>
+        <!-- 상단 프로젝트 정보 -->
+
+        <div class="project-info">
+
+            <div>
+
+                <div class="project-number">
+                    01
+                </div>
+
+                <div class="project-name">
+                    Project Name
+                </div>
+
+            </div>
+
+            <div>
+
+                <div style="font-size:32px;">
+                    Vivamus sed sapien
+                </div>
+
+                <div class="project-date">
+                    March 2047
+                </div>
+
+            </div>
+
+            <div class="project-description">
+
+                Praesent bibendum a elit non efficitur.
+                Etiam et velit vitae quam aliquet fermentum.
+                Quisque sit amet nulla dictum,
+                cursus erat a, tempus est.
+
+            </div>
+
         </div>
 
-        <div class="art a2">
-            <img src="image/carving4.png">
-            <p>carving4.png</p>
-        </div>
+        <!-- 이미지 -->
 
-        <div class="art a3">
-            <img src="image/flash1.png">
-            <p>flash1.png</p>
-        </div>
+        <div class="gallery">
 
-        <div class="art a4">
-            <img src="image/sheep1.png">
-            <p>sheep1.png</p>
-        </div>
+            <div class="art-item square">
+                <img src="./image/paper1.jpg">
+                <p>Image 1</p>
+            </div>
 
-        <div class="art a5">
-            <img src="image/ice.png">
-            <p>ice.png</p>
-        </div>
+            <div class="art-item vertical">
+                <img src="./image/sheep1.png">
+                <p>Image 2</p>
+            </div>
 
-        <div class="art a6">
-            <img src="image/bird.jpg">
-            <p>bird.jpg</p>
-        </div>
+            <div class="art-item square">
+                <img src="./image/paper2.jpg">
+                <p>Image 3</p>
+            </div>
 
-        <div class="art a7">
-            <img src="image/paper3.png">
-            <p>paper3.png</p>
-        </div>
+            <div class="art-item horizontal">
+                <img src="./image/flash1.png">
+                <p>Image 4</p>
+            </div>
 
-        <div class="art a8">
-            <img src="image/paper1.jpg">
-            <p>paper1.jpg</p>
-        </div>
+            <div class="art-item square">
+                <img src="./image/paper3.png">
+                <p>Image 5</p>
+            </div>
 
-        <div class="art a9">
-            <img src="image/paper2.jpg">
-            <p>paper2.jpg</p>
-        </div>
+            <div class="art-item vertical">
+                <img src="./image/carving3.png">
+                <p>Image 6</p>
+            </div>
 
-        <div class="art a10">
-            <img src="image/flash.png">
-            <p>flash.png</p>
+            <div class="art-item horizontal">
+                <img src="./image/flash2.png">
+                <p>Image 7</p>
+            </div>
+
+            <div class="art-item square">
+                <img src="./image/bird.jpg">
+                <p>Image 8</p>
+            </div>
+
         </div>
 
     </div>
@@ -425,31 +500,34 @@ body{
 
 <script>
 
-/* 윈도우 열기 */
+/* 윈도우 */
 
-const openWindow = document.getElementById('openWindow');
-const windowBox = document.getElementById('window');
+const openWorks = document.getElementById('openWorks');
+
+const worksWindow = document.getElementById('worksWindow');
+
 const closeBtn = document.getElementById('closeBtn');
 
-openWindow.addEventListener('click',()=>{
+openWorks.addEventListener('click',()=>{
 
-    windowBox.classList.add('active');
+    worksWindow.classList.add('active');
 
 });
 
 closeBtn.addEventListener('click',()=>{
 
-    windowBox.classList.remove('active');
+    worksWindow.classList.remove('active');
 
 });
 
-/* 커스텀 커서 */
+/* 커서 */
 
 const cursor = document.querySelector('.cursor');
 
 document.addEventListener('mousemove',(e)=>{
 
     cursor.style.left = e.clientX + 'px';
+
     cursor.style.top = e.clientY + 'px';
 
 });

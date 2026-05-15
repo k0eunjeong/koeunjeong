@@ -1,29 +1,460 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-	<meta charset="utf-8">
-	<title>제목</title>
-	<meta name="description" content="설명">
-	<meta name="keywords" content="키워드1, 키워드2">
-	<link rel="stylesheet" href="style.css">
-	<meta name="viewport" content="width=device-width, user-scalable=no">
-	<link rel="icon" type="image/png" href="">
-	<meta property="og:image" content="">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>GO EUNJEONG ARCHIVE</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    cursor:none;
+}
+
+body{
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+    font-family:Helvetica, Arial, sans-serif;
+    background:#dcdcdc;
+}
+
+/* 배경 */
+
+.background{
+    position:fixed;
+    inset:0;
+
+    /* 여기 중요 */
+    background:url('gmgmfla.png');
+
+    background-size:cover;
+    background-position:center;
+
+    filter:grayscale(100%);
+}
+
+/* 어두운 필름 레이어 */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.18);
+    pointer-events:none;
+}
+
+/* 메인 폴더 */
+
+.desktop{
+    position:relative;
+    width:100%;
+    height:100%;
+    z-index:5;
+}
+
+.folder{
+    position:absolute;
+
+    width:150px;
+    height:105px;
+
+    background:linear-gradient(to bottom,#6fd0ff,#36aae8);
+
+    border-radius:18px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-size:1.7rem;
+    font-weight:700;
+
+    box-shadow:
+    inset 0 8px 12px rgba(255,255,255,0.35),
+    0 8px 25px rgba(0,0,0,0.25);
+
+    transition:.3s;
+}
+
+.folder::before{
+    content:"";
+
+    position:absolute;
+
+    top:-12px;
+    left:12px;
+
+    width:55px;
+    height:18px;
+
+    background:#8adfff;
+
+    border-radius:8px 8px 0 0;
+}
+
+.folder:hover{
+    transform:translateY(-5px) scale(1.04);
+}
+
+/* 폴더 위치 */
+
+.works{
+    left:12%;
+    bottom:16%;
+}
+
+.text{
+    left:38%;
+    bottom:16%;
+}
+
+.cv{
+    left:62%;
+    bottom:16%;
+}
+
+.contact{
+    right:10%;
+    bottom:16%;
+}
+
+/* Finder Window */
+
+.window{
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%) scale(.95);
+
+    width:90%;
+    height:88vh;
+
+    background:#efefef;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:.35s;
+
+    z-index:100;
+}
+
+.window.active{
+    opacity:1;
+    pointer-events:auto;
+    transform:translate(-50%,-50%) scale(1);
+}
+
+/* 상단 바 */
+
+.topbar{
+    width:100%;
+    height:72px;
+
+    background:#f7f7f7;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    border-bottom:1px solid #ddd;
+}
+
+.logo{
+    font-size:2rem;
+    font-weight:700;
+    color:#444;
+}
+
+.close{
+    width:40px;
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:black;
+    color:white;
+
+    font-size:1rem;
+}
+
+/* 이미지 영역 */
+
+.gallery{
+    position:relative;
+
+    width:100%;
+    height:calc(100% - 72px);
+
+    overflow:auto;
+
+    padding:80px;
+}
+
+/* 작품 이미지 */
+
+.art{
+    position:absolute;
+
+    transition:.3s;
+}
+
+.art img{
+    width:100%;
+    display:block;
+
+    border:8px solid #f3f3f3;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.18);
+}
+
+.art p{
+    margin-top:10px;
+
+    text-align:center;
+
+    color:#222;
+
+    font-size:1.3rem;
+}
+
+.art:hover{
+    transform:scale(1.08);
+    z-index:10;
+}
+
+/* 개별 위치 */
+
+.a1{
+    width:140px;
+    top:40px;
+    left:60px;
+}
+
+.a2{
+    width:220px;
+    top:60px;
+    left:320px;
+}
+
+.a3{
+    width:160px;
+    top:220px;
+    left:680px;
+}
+
+.a4{
+    width:180px;
+    top:200px;
+    left:980px;
+}
+
+.a5{
+    width:140px;
+    top:480px;
+    left:120px;
+}
+
+.a6{
+    width:160px;
+    top:420px;
+    left:520px;
+}
+
+.a7{
+    width:220px;
+    top:560px;
+    left:900px;
+}
+
+.a8{
+    width:160px;
+    top:850px;
+    left:300px;
+}
+
+.a9{
+    width:170px;
+    top:860px;
+    left:700px;
+}
+
+.a10{
+    width:120px;
+    top:1050px;
+    left:1040px;
+}
+
+/* 커스텀 커서 */
+
+.cursor{
+    position:fixed;
+
+    width:28px;
+    height:28px;
+
+    border:2px solid white;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    mix-blend-mode:difference;
+
+    z-index:99999;
+}
+
+</style>
 </head>
+
 <body>
 
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	
-	<img class="yellow" src="https://upload.wikimedia.org/wikipedia/commons/4/45/Eopsaltria_australis_-_Mogo_Campground.jpg">
+<div class="background"></div>
+<div class="overlay"></div>
 
-	<img class="white" src="https://mblogthumb-phinf.pstatic.net/MjAyNTAzMThfMTk3/MDAxNzQyMjg3Mjg2Mjky.JCYppzT07On8HISMYF8bBouUuIq-SJFiFg_LOm4lsmUg.FvtfqfpqN4EDihfQPsFcJM01MpcG5Oq92eCc4dl3Qp8g.JPEG/image.JPEG?type=w800">
+<div class="desktop">
 
-	<img class="blue" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCW0xiAC7rJHNvBMKKVVDAK9Bn1B0Pr2btcQ&s">
+    <div class="folder works" id="openWindow">
+        WORKS
+    </div>
+
+    <div class="folder text">
+        TEXT
+    </div>
+
+    <div class="folder cv">
+        CV
+    </div>
+
+    <div class="folder contact">
+        CONTACT
+    </div>
+
+</div>
+
+<!-- Finder Window -->
+
+<div class="window" id="window">
+
+    <div class="topbar">
+
+        <div class="logo">
+            image
+        </div>
+
+        <button class="close" id="closeBtn">
+            ✕
+        </button>
+
+    </div>
+
+    <div class="gallery">
+
+        <div class="art a1">
+            <img src="image/carving3.png">
+            <p>carving3.png</p>
+        </div>
+
+        <div class="art a2">
+            <img src="image/carving4.png">
+            <p>carving4.png</p>
+        </div>
+
+        <div class="art a3">
+            <img src="image/flash1.png">
+            <p>flash1.png</p>
+        </div>
+
+        <div class="art a4">
+            <img src="image/sheep1.png">
+            <p>sheep1.png</p>
+        </div>
+
+        <div class="art a5">
+            <img src="image/ice.png">
+            <p>ice.png</p>
+        </div>
+
+        <div class="art a6">
+            <img src="image/bird.jpg">
+            <p>bird.jpg</p>
+        </div>
+
+        <div class="art a7">
+            <img src="image/paper3.png">
+            <p>paper3.png</p>
+        </div>
+
+        <div class="art a8">
+            <img src="image/paper1.jpg">
+            <p>paper1.jpg</p>
+        </div>
+
+        <div class="art a9">
+            <img src="image/paper2.jpg">
+            <p>paper2.jpg</p>
+        </div>
+
+        <div class="art a10">
+            <img src="image/flash.png">
+            <p>flash.png</p>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="cursor"></div>
+
+<script>
+
+/* 윈도우 열기 */
+
+const openWindow = document.getElementById('openWindow');
+const windowBox = document.getElementById('window');
+const closeBtn = document.getElementById('closeBtn');
+
+openWindow.addEventListener('click',()=>{
+
+    windowBox.classList.add('active');
+
+});
+
+closeBtn.addEventListener('click',()=>{
+
+    windowBox.classList.remove('active');
+
+});
+
+/* 커스텀 커서 */
+
+const cursor = document.querySelector('.cursor');
+
+document.addEventListener('mousemove',(e)=>{
+
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+
+});
+
+</script>
 
 </body>
 </html>
